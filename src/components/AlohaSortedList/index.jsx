@@ -21,11 +21,11 @@ class AlohaSortedList extends Component {
   };
   render() {
     const { isDirectSort } = this.state;
-    const { users } = this.props;
+    const { users, deleteUser } = this.props;
     return (
       <>
         <span>{isDirectSort ? 'Прямой' : 'Обратный'} порядок сортировки</span>
-        <AlohaList users={users} />
+        <AlohaList users={users} deleteUser={deleteUser} />
         <button onClick={this.sortUsers}>SORT</button>
       </>
     );

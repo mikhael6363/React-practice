@@ -7,9 +7,14 @@ class Aloha extends Component {
       isGreeting: true,
     };
   }
-  btnHandler = () => {
+  switchHandler = () => {
     const { isGreeting } = this.state;
     this.setState({ isGreeting: !isGreeting });
+  };
+
+  deleteHandler = () => {
+    const { deleteUser, id } = this.props;
+    deleteUser(id);
   };
   render() {
     const { name } = this.props;
@@ -19,7 +24,8 @@ class Aloha extends Component {
         <h1>
           {isGreeting ? 'Hello' : 'Goodbye'}, {name}
         </h1>
-        <button onClick={this.btnHandler}>Switch</button>
+        <button onClick={this.switchHandler}>Switch</button>
+        <button onClick={this.deleteHandler}>X</button>
       </>
     );
   }

@@ -34,12 +34,23 @@ class AlohaDashboard extends Component {
       ],
     };
   }
+  deleteUser = (userId) => {
+    const { users } = this.state;
+    const usersCopy = JSON.parse(JSON.stringify(users));
+    this.setState({
+      users: usersCopy.filter(({ id }) => id !== userId), // возвращает юзеров, id к-х не совпадает с текущим
+    });
+  };
   setUsers = (users) => this.setState({ users });
   render() {
     const { users } = this.state;
     return (
       <>
-        <AlohaSortedList users={users} setUsers={this.setUsers} />
+        <AlohaSortedList
+          users={users}
+          setUsers={this.setUsers}
+          deleteUser={this.deleteUser}
+        />
       </>
     );
   }
