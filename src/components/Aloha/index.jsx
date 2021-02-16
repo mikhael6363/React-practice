@@ -12,15 +12,17 @@ class Aloha extends Component {
     this.setState({ isGreeting: !isGreeting });
   };
   render() {
-    const { name, img } = this.props;
+    const { name } = this.props;
     const { isGreeting } = this.state;
     return (
       <>
-        <h1>{isGreeting ? 'Hello' : 'Goodbye'}, {name}</h1>
-        <img src={img} />
+        <h1>
+          {isGreeting ? 'Hello' : 'Goodbye'}, {name}
+        </h1>
         <button onClick={this.btnHandler}>Switch</button>
       </>
     );
   }
 }
+
 export default Aloha;
