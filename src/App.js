@@ -1,57 +1,73 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import './App.css';
-import UserList from './components/UserList';
-import SelectedUserList from './components/UserList/SelectedUserList';
+import StopWatch from './components/StopWatch';
 
-const usersDB = [
-  {
-    id: 1,
-    firstName: 'John',
-    lastName: 'Snow',
-  },
-  {
-    id: 2,
-    firstName: 'Elon',
-    lastName: 'Musk',
-  },
-  {
-    id: 3,
-    firstName: 'Benjamin',
-    lastName: 'Franklin',
-  },
-  {
-    id: 4,
-    firstName: 'Linda',
-    lastName: 'Crowd',
-  },
-  {
-    id: 5,
-    firstName: 'Anna',
-    lastName: 'Romanova',
-  },
-];
-
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      users: usersDB.map((u) => ({ ...u, isSelected: false })),
-    }; // добавили в каждого юзера isSelected
-  }
-  setUsers = (newUsers) => this.setState({ users: newUsers });
-  render() {
-    const { users } = this.state;
-    return (
-      <>
-        <header>
-          <SelectedUserList users={users} />
-        </header>
-        <main>
-          <UserList users={users} setUsers={this.setUsers} />
-        </main>
-      </>
-    );
-  }
+function App(props) {
+  const [isVisible, setIsVisible] = useState(true);
+  return (
+    <>
+      <button onClick={() => setIsVisible(!isVisible)}>Change</button>
+      {isVisible ? <StopWatch /> : null}
+    </>
+  );
 }
 
 export default App;
+
+/*
+  Жизненный цикл Копонента:
+  (детально можно посмотреть в диаграмме)
+
+  1. Монтирование (рождение) => componentDidMount
+  2. Обновление (жизнь) => componentDidUpdate
+  3. Размонтирование (смерть) => componentWillUnmount
+_______________________________________________________________________________
+
+  Порядок действий на примере нашего секундомера:
+  1- constructor
+  2- render
+  3- componentDidMount -> содержит this.start() -> к-й сожержит setState
+  4- render (постоянно обновляет состояние)
+  5- componentDidUpdate (и по кругу 4-5 пункт) render, didUpdate...
+_______________________________________________________________________________
+
+  Что вызывает обновление состояния в React?
+  a. Новые Props
+  b. setState()
+  c. forceUpdate() - плохая практика
+_______________________________________________________________________________
+
+  Методы жизненных циклов:
+  1) "componentDidMount()"
+    => СРАБАТЫВАЕТ ПОСЛЕ ПЕРВОГО РЕНДЕРА
+    Вызывается сразу после монтирования (то есть, вставки компонента в DOM).
+
+  2) "componentDidUpdate(prevProps, prevState, snapshot)"
+    => СРАБАТЫВАЕТ ПОСЛЕ КАЖДОГО РЕНДЕРА, ИСКЛЮЧАЯ ПЕРВЫЙ
+    Вызывается сразу после обновления. Не вызывается при первом рендере. Метод позволяет работать с DOM при обновлении компонента.
+
+  3) "componentWillUnmount()"
+    => РАЗМОНТИРУЕТ (ОСТАНАВЛИВАЕТ) КОМПОНЕНТ
+    Вызывается непосредственно перед размонтированием и удалением компонента. В этом методе выполняется необходимый сброс: отмена таймеров, сетевых запросов и подписок, созданных в componentDidMount().
+
+
+_______________________________________________________________________________
+
+
+
+
+
+_______________________________________________________________________________
+
+
+
+
+
+_______________________________________________________________________________
+
+
+
+
+
+_______________________________________________________________________________
+*/
