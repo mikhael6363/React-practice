@@ -4,10 +4,10 @@ const UserCard = (props) => {
     userSelector,
   } = props;
   const styles = {
-    outline: isSelected ? '3px solid #000000' : undefined,
+    background: isSelected ? '#89ffce' : undefined,
   };
 
-  const btnHandler = () => void userSelector(id);
+  const btnHandler = () => userSelector(id);
 
   return (
     <article style={styles}>
