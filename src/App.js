@@ -6,7 +6,9 @@ function App(props) {
   const [isVisible, setIsVisible] = useState(true);
   return (
     <>
-      <button onClick={() => setIsVisible(!isVisible)}>Change</button>
+      <button className='btn' onClick={() => setIsVisible(!isVisible)}>
+        {isVisible ? 'Hide' : 'Unhide'}
+      </button>
       {isVisible ? <StopWatch /> : null}
     </>
   );

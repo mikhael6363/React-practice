@@ -1,0 +1,46 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  min-width: 300px;
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1em;
+
+  background: #bfbfbf56;
+  border: 1px solid #000000;
+  color: #000000;
+  font-size: 1.5rem;
+}
+
+.btn {
+  display: block;
+  min-width: 100px;
+  max-width: 120px;
+  width: 100%;
+  margin: 1em;
+  padding: 0.7em 0;
+
+  background: #0e0e0e;
+  border: 2px solid;
+  outline: none;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+
+  transition: all 0.25s ease-in-out;
+}
+.btn-stop {
+  color: #ff0000;
+}
+.btn-start {
+  color: #00aa06;
+}
