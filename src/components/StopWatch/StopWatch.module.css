@@ -38,9 +38,9 @@
 
   transition: all 0.25s ease-in-out;
 }
-.btn-stop {
+.btnStop {
   color: #ff0000;
 }
-.btn-start {
+.btnStart {
   color: #00aa06;
 }
