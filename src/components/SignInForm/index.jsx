@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import cx from 'classnames';
 import styles from './SignInForm.module.css';
 
 const initialValues = {
   email: '',
   password: '',
+  isemailValid: true,
+  ispasswordValid: true,
 };
 
 class SignInForm extends Component {
@@ -12,9 +15,11 @@ class SignInForm extends Component {
     this.state = { ...initialValues };
   }
 
-  handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
-  };
+  handleChange = ({ target: { name, value } }) =>
+    this.setState({
+      [name]: value,
+      [`is${name}Valid`]: !value.includes(' '),
+    });
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -22,16 +27,22 @@ class SignInForm extends Component {
   };
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, isemailValid } = this.state;
+    const emailClassNames = cx({
+      [styles.input]: true,
+      [styles.invalidInput]: !isemailValid,
+    });
+
     return (
       <form className={styles.container} onSubmit={this.handleSubmit}>
         <input
           onChange={this.handleChange}
           value={email}
-          className={styles.input}
+          className={emailClassNames}
           placeholder='Username'
           type='email'
           name='email'
+          required
         ></input>
         <input
           onChange={this.handleChange}
@@ -40,6 +51,7 @@ class SignInForm extends Component {
           placeholder='Password'
           type='password'
           name='password'
+          required
         ></input>
         <input className={styles.input} type='submit'></input>
       </form>
@@ -49,12 +61,9 @@ class SignInForm extends Component {
 
 export default SignInForm;
 
-/*
-<input
-          // onChange={this.handleChange}
-          value={password}
-          className={styles.input}
-          placeholder='Password'
-          type='password'
-          name='password'
-        ></input> */
+/* function cx(objectStyles) { // полифил "npm classnames"
+  return Object.entries(objectStyles)
+    .filter(([className, condition]) => condition)
+    .map(([className, condition]) => className)
+    .join(' ');
+} */
