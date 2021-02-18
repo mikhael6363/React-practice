@@ -4,30 +4,34 @@ class StopWatch extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isRunning: false,
       time: new Date(0, 0, 0, 0, 0, 0, 0),
     };
-    this.intervalId = null;
+    this.timeOutID = null;
   }
-  tick = () => {
-    const { time } = this.state;
-    time.setSeconds(time.getSeconds() + 1); // устанавливаем новую полученную секунду + 1 -> в об-т time
-    this.setState({ time });
-  };
+  tick = () =>
+    this.setState((state, props) => {
+      const { time } = state;
+      const timeCopy = new Date(time.getTime());
+      timeCopy.setSeconds(time.getSeconds() + 1);
+      return {
+        time: timeCopy,
+      };
+    });
 
-  start = () => {
-    if (!this.intervalId) {
-      this.intervalId = setInterval(this.tick, 1000); // this чтобы присвоить null выше
-    }
-  };
+  start = () => this.setState({ isRunning: true });
 
-  stop = () => {
-    clearInterval(this.intervalId);
-    this.intervalId = null; // вытаскиваем интервал, присвоив изначальное значение
+  stop = () => this.setState({ isRunning: false });
+
+  clear = () => {
+    clearTimeout(this.timeOutID);
+    this.timeOutID = null;
   };
 
   reset = () => {
-    this.stop();
+    this.clear();
     this.setState({
+      isRunning: false,
       time: new Date(0, 0, 0, 0, 0, 0, 0),
     });
   };
@@ -36,19 +40,25 @@ class StopWatch extends Component {
     this.start();
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate() {
+    const { isRunning } = this.state;
+    if (isRunning) {
+      // если таймер запущен, запускаем tick
+      this.timeOutID = setTimeout(this.tick, 1000);
+    }
+  }
 
   componentWillUnmount() {
-    this.stop();
+    this.clear();
   }
 
   render() {
-    const { time } = this.state;
+    const { time, isRunning } = this.state;
     return (
       <article>
         <h1>{time.toLocaleTimeString('it-IT')}</h1>
-        <button onClick={this.start}>Start</button>
-        <button onClick={this.stop}>Stop</button>
+        {isRunning ? ( <button onClick={this.stop}>Stop</button> ) : ( <button onClick={this.start}>Start</button> )}
+
         <button onClick={this.reset}>Reset</button>
       </article>
     );
