@@ -22,12 +22,17 @@ const UserCard = (props) => {
   );
 };
 
+UserCard.defaultProps = {
+  user: { id: null, firstName: 'Anon', lastName: 'Anon' },
+  userSelector: () => {},
+};
+
 export const userPropType = PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    firstName: PropTypes.string.isRequired,
-    lastName: PropTypes.string.isRequired,
-    isSelected: PropTypes.bool,
-  }).isRequired;
+  id: PropTypes.number.isRequired,
+  firstName: PropTypes.string.isRequired,
+  lastName: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool,
+}).isRequired;
 
 UserCard.propTypes = {
   user: userPropType,
