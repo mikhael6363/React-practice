@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const UserCard = (props) => {
   const {
     user: { id, firstName, lastName, isSelected },
@@ -7,7 +9,7 @@ const UserCard = (props) => {
     background: isSelected ? '#89ffce' : undefined,
   };
 
-  const btnHandler = () => userSelector(id);
+  const btnHandler = () => void userSelector(id);
 
   return (
     <article style={styles}>
@@ -18,6 +20,18 @@ const UserCard = (props) => {
       <button onClick={btnHandler}>Select this user</button>
     </article>
   );
+};
+
+export const userPropType = PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    isSelected: PropTypes.bool,
+  }).isRequired;
+
+UserCard.propTypes = {
+  user: userPropType,
+  isSelected: PropTypes.func,
 };
 
 export default UserCard;

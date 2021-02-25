@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import UserCard from './UserCard';
+import UserCard, { userPropType } from './UserCard';
+import PropTypes from 'prop-types';
 
 class UserList extends Component {
   userSelector = (id) => {
@@ -24,5 +25,10 @@ class UserList extends Component {
     );
   }
 }
+
+UserCard.propTypes = {
+  user: PropTypes.arrayOf(userPropType).isRequired,
+  setUsers: PropTypes.func,
+};
 
 export default UserList;
