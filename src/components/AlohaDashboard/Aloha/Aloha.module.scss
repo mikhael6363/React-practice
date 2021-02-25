@@ -1,0 +1,31 @@
+@import './../../../common/styles/breakpoints';
+// @import './../../../common/styles/templates'; @extend %...
+
+$bg-color: darkgray;
+$bg-color-hover: lightgreen;
+$font-color: red;
+
+.container {
+  margin: 1em auto;
+  max-width: 60%;
+  text-align: center;
+  color: $font-color;
+  font-size: 1.5rem;
+  border: {
+    width: 2px;
+    style: solid;
+    color: $font-color;
+  }
+
+  > h1 {
+    background: $bg-color;
+    &:hover {
+      background: $bg-color-hover;
+    }
+  }
+
+  @media screen and (max-width: $sm) {
+    display: flex;
+    flex-direction: column;
+  }
+}
