@@ -1,0 +1,12 @@
+%flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+%one-liner {
+  white-space: no-wrap;
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+}
