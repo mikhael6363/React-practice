@@ -33,9 +33,15 @@ class Aloha extends Component {
       </>
     );
   }
+
+/*   static propTypes = {
+    name: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    deleteUser: PropTypes.func.isRequired,
+  }; */
 }
 
-Aloha.propTypes = {
+Aloha.propTypes = { // по сути это статическое свойство
   name: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   deleteUser: PropTypes.func.isRequired,
