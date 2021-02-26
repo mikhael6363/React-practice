@@ -1,15 +1,23 @@
 import React from 'react';
 import './App.css';
-import FlexContainer from './components/FlexContainer';
+import { ImageWrapper } from './components/ImageWrapper';
 
 const App = (props) => {
   return (
     <>
-      <FlexContainer jc='center' ai='center' column reverse wrap='wrap'>
-        <div>test1</div>
-        <div>test2</div>
-        <div>test3</div>
-      </FlexContainer>
+      <ImageWrapper
+        width='50vh'
+        height='300px'
+        style={{ border: '5px solid red' }}
+        onClick={alert}
+        title='Supernova'
+        tabIndex='1'
+      >
+        <img
+          alt='Supernova'
+          src='https://i.pinimg.com/originals/76/cc/3d/76cc3d83f1a3bbe54b101be76c5d7a37.jpg'
+        />
+      </ImageWrapper>
     </>
   );
 };
