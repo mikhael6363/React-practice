@@ -1,13 +1,18 @@
+import React from 'react';
 import './App.css';
-import UserList from './components/UserList';
+import FlexContainer from './components/FlexContainer';
 
-function App(props) {
+const App = (props) => {
   return (
     <>
-      <UserList />
+      <FlexContainer jc='center' ai='center' column reverse wrap='wrap'>
+        <div>test1</div>
+        <div>test2</div>
+        <div>test3</div>
+      </FlexContainer>
     </>
   );
-}
+};
 
 export default App;
 
@@ -267,7 +272,6 @@ _______________________________________________________________________________
 
 */
 
-
 /*
      Проверка типов PropTypes:
 
@@ -330,5 +334,12 @@ _______________________________________________________________________________
       Больше можно посмотреть здесь : https://ru.reactjs.org/docs/typechecking-with-proptypes.html
 
     Вывод: PropTypes работают только во время разработки! И они не вешают приложение.
+
+*/
+
+/*
+    🔥 Тема: React. prop children 🔥
+
+
 
 */
